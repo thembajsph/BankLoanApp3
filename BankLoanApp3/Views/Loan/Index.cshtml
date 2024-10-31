@@ -1,0 +1,62 @@
+﻿@model BankLoanApp3.ViewModels.HomeLoanApplicationViewModel
+
+@{
+    ViewData["Title"] = "My Loan Details";
+}
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Page Header -->
+<div class="container mt-4">
+    <h2 class="mb-4">Loan Details</h2>
+
+    <!-- Loan Details Card -->
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title mb-0">Application Details</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">First Name:</dt>
+                <dd class="col-sm-9">@Model.UserFirstName</dd>
+
+                <dt class="col-sm-3">Last Name:</dt>
+                <dd class="col-sm-9">@Model.UserLastName</dd>
+
+                <dt class="col-sm-3">Gross Salary:</dt>
+                <dd class="col-sm-9">@Model.GrossSalary.ToString("C")</dd>
+
+                <dt class="col-sm-3">Credit Score:</dt>
+                <dd class="col-sm-9">@Model.CreditScore</dd>
+
+                <dt class="col-sm-3">Purchase Price:</dt>
+                <dd class="col-sm-9">@Model.PurchasePrice.ToString("C")</dd>
+
+                <dt class="col-sm-3">Max Installment:</dt>
+                <dd class="col-sm-9">@Model.MaxInstallment.ToString("C")</dd>
+
+                <dt class="col-sm-3">Loan Percentage:</dt>
+                <dd class="col-sm-9">@Model.LoanPercentage.ToString("P")</dd>
+
+                <dt class="col-sm-3">Deposit Required:</dt>
+                <dd class="col-sm-9">@Model.DepositRequired.ToString("C")</dd>
+
+                <dt class="col-sm-3">New Installment:</dt>
+                <dd class="col-sm-9">@Model.NewInstallment.ToString("C")</dd>
+
+                <dt class="col-sm-3">Loan Status:</dt>
+                <dd class="col-sm-9">@Model.LoanStatus</dd>
+
+                <dt class="col-sm-3">Application Date:</dt>
+                <dd class="col-sm-9">@Model.ApplicationDate.ToString("g")</dd>
+            </dl>
+        </div>
+        <div class="card-footer text-end">
+            <!-- Return button to navigate to the previous page -->
+            <a href="javascript:history.back()" class="btn btn-primary">Return</a>
+        </div>
+    </div>
+</div>
+

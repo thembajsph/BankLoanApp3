@@ -1,0 +1,105 @@
+﻿@model BankLoanApp3.ViewModels.HomeLoanApplicationViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Application Result</title>
+    <!-- Add Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f7f9;
+        }
+
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+        }
+
+        .card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .card-body p {
+            font-size: 1.1em;
+        }
+
+        .denied {
+            font-size: 2rem;
+            color: #dc3545;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .approved {
+            font-size: 2rem;
+            color: #28a745;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .small-text {
+            font-size: 0.9em;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header text-center">
+                <h2>Loan Application Result</h2>
+            </div>
+            <div class="card-body">
+                <!-- Show loan details -->
+                <p class="small-text"><strong>Gross Salary:</strong> @Model.GrossSalary</p>
+                <p class="small-text"><strong>Credit Score:</strong> @Model.CreditScore</p>
+                <p class="small-text"><strong>Purchase Price:</strong> @Model.PurchasePrice</p>
+
+                <!-- Conditional rendering: Only show if LoanStatus is not Denied -->
+                @if (Model.LoanStatus != "Denied")
+                {
+                    <p><strong>Loan Percentage:</strong> @((Model.LoanPercentage * 100).ToString("0"))%</p>
+
+                    <p><strong>Deposit Required:</strong> @Model.DepositRequired</p>
+                    <p><strong>New Installment:</strong> @Model.NewInstallment</p>
+                }
+
+                <p class="small-text"><strong>Application Date:</strong> @Model.ApplicationDate.ToString("MMMM dd, yyyy")</p>
+
+                <!-- Show loan status -->
+                @if (Model.LoanStatus == "Denied")
+                {
+                    <div class="denied">Denied</div>
+                }
+                else
+                {
+                    <div class="approved">Approved</div>
+                }
+            </div>
+            <div class="card-footer text-center">
+                <a href="https://localhost:7264/" class="btn btn-primary">Back to Home</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Bootstrap JS and dependencies -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+

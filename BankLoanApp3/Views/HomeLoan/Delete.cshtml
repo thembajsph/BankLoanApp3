@@ -1,0 +1,68 @@
+﻿@model BankLoanApp3.ViewModels.HomeLoanApplicationViewModel
+
+@{
+    ViewData["Title"] = "Delete Loan Application";
+}
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">@ViewData["Title"]</h2>
+
+    <div class="card">
+        <div class="card-body">
+            <h3 class="mb-4">Are you sure you want to delete this loan application?</h3>
+
+            <div>
+                <h4 class="mb-3">Loan Application Details</h4>
+                <hr />
+                <dl class="row">
+                    <dt class="col-sm-4">
+                        User Name
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Model.UserFirstName @Model.UserLastName
+                    </dd>
+                    <dt class="col-sm-4">
+                        Gross Salary
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Model.GrossSalary.ToString("C")
+                    </dd>
+                    <dt class="col-sm-4">
+                        Credit Score
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Model.CreditScore
+                    </dd>
+                    <dt class="col-sm-4">
+                        Purchase Price
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Model.PurchasePrice.ToString("C")
+                    </dd>
+                    <dt class="col-sm-4">
+                        Loan Status
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Model.LoanStatus
+                    </dd>
+                    <dt class="col-sm-4">
+                        Application Date
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Model.ApplicationDate.ToString("g")
+                    </dd>
+                </dl>
+
+                <form asp-action="DeleteConfirmed" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

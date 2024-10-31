@@ -1,0 +1,130 @@
+﻿@model BankLoanApp3.ViewModels.HomeLoanApplicationViewModel
+
+@{
+    ViewData["Title"] = "Apply for Loan";
+}
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f7f9;
+        }
+
+        .container {
+            margin-top: 50px;
+            max-width: 600px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-header {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h2 class="form-header">Apply for a Loan</h2>
+            </div>
+            <div class="card-body">
+                <!-- Validation Summary -->
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                            {
+                                <li>@error.ErrorMessage</li>
+                            }
+                        </ul>
+                    </div>
+                }
+
+                <!-- Success and Error Messages -->
+                @if (TempData["SuccessMessage"] != null)
+                {
+                    <div class="alert alert-success">
+                        @TempData["SuccessMessage"]
+                    </div>
+                }
+
+                @if (TempData["ErrorMessage"] != null)
+                {
+                    <div class="alert alert-danger">
+                        @TempData["ErrorMessage"]
+                    </div>
+                }
+
+                <!-- Loan Application Form -->
+                <form asp-action="Apply" method="post">
+                    <!-- Form fields -->
+                    <div class="form-group" style="display:none;">
+                        <label asp-for="UserFirstName"></label>
+                        <input asp-for="UserFirstName" class="form-control" readonly />
+                        <span asp-validation-for="UserFirstName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group" style="display:none;">
+                        <label asp-for="UserLastName"></label>
+                        <input asp-for="UserLastName" class="form-control" readonly />
+                        <span asp-validation-for="UserLastName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group" style="display:none;>
+                        <label asp-for="ApplicationUserId"></label>
+                        <input asp-for="ApplicationUserId" class="form-control" readonly />
+                        <span asp-validation-for="ApplicationUserId" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="GrossSalary"></label>
+                        <input asp-for="GrossSalary" class="form-control" placeholder="Enter your gross salary" />
+                        <span asp-validation-for="GrossSalary" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="CreditScore"></label>
+                        <input asp-for="CreditScore" class="form-control" placeholder="Enter your credit score" />
+                        <span asp-validation-for="CreditScore" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="PurchasePrice"></label>
+                        <input asp-for="PurchasePrice" class="form-control" placeholder="Enter the purchase price of the property" />
+                        <span asp-validation-for="PurchasePrice" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Submit Application</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }
+</body>
+</html>
+

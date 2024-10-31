@@ -1,0 +1,59 @@
+﻿@model BankLoanApp3.ViewModels.AllLoansViewModel
+
+@{
+    ViewData["Title"] = "Loan Applications";
+}
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <h1 class="mb-4">@ViewData["Title"]</h1>
+
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>User Name</th>
+                        <th>ID</th>
+                        <th>Gross Salary</th>
+                        <th>Credit Score</th>
+                        <th>Purchase Price</th>
+                        <th>Loan Status</th>
+                        <th>Application Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var application in Model.LoanApplications)
+                    {
+                        <tr>
+                            <td>@application.UserFirstName @application.UserLastName</td>
+                            <td>@application.Id</td>
+                            <td>@application.GrossSalary.ToString("C")</td>
+                            <td>@application.CreditScore</td>
+                            <td>@application.PurchasePrice.ToString("C")</td>
+                            <td>@application.LoanStatus</td>
+                            <td>@application.ApplicationDate.ToString("g")</td>
+                            <td>
+                                <!-- Edit Button with Bootstrap Warning Styling -->
+                                <a asp-controller="HomeLoan" asp-action="Edit" asp-route-id="@application.Id" class="btn btn-warning btn-sm">Edit</a>
+
+                                <!-- Delete Button with Bootstrap Danger Styling -->
+                                <form asp-controller="HomeLoan" asp-action="Delete" asp-route-id="@application.Id" method="post" class="d-inline-block ml-2">
+                                    <input type="hidden" name="id" value="@application.Id" />
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to withdraw this application?');">withdraw</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <!-- Return button to navigate to the previous page -->
+            <button onclick="window.history.back();" class="btn btn-primary mt-3">Return</button>
+        </div>
+    </div>
+</div>
